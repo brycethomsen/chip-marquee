@@ -1,0 +1,2 @@
+alphasign
+pyserial

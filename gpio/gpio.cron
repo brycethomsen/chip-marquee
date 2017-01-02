@@ -1,0 +1,1 @@
+@reboot /home/chip/chip_marquee/gpio/ttySO_state.sh
