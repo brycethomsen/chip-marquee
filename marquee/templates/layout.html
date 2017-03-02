@@ -1,22 +1,50 @@
 <!doctype html>
 <html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 <title>chip marquee</title>
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='narrow-jumbotron.css') }}">
   <body>
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <div class="alert alert-success alert-dismissible" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        {% for message in messages %}
-          {{ message }}
-        {% endfor %}
-        </div>
-      {% endif %}
-    {% endwith %}
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills float-right">
+            <li class="nav-item">
+              <a class="nav-link active" href="{{ url_for('index_page') }}">message<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href=""{{ url_for('index_page') }}"">admin</a>
+            </li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">chip marquee</h3>
+      </div>
 
-      <h1>chip marquee</h1>
+      {% with messages = get_flashed_messages() %}
+  <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+  {% if messages %}
+    {% for stuff in messages %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <!-- <strong>Title</strong> --> Displaying: {{ stuff }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
         {% block body %}{% endblock %}
+        <footer class="footer">
+          <p>&copy; bryce thomsen</p>
+        </footer>
+
+        </div> <!-- /container -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+
+
+
   </body>
 </html>

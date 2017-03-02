@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
-{% block body %}
-     <h3>Message</h3>
-     <form action="{{ url_for('index_page') }}" method="post">
-     <input type = "text" name = "message" /></br>
-     <input type = "submit" value = "submit" /></br>
-   </form>
 
-   <p>Displaying: {{message}}</p>
+{% block body %}
+  <div class="jumbotron">
+    <form action="{{ url_for('index_page') }}" class="form-signin" method="post">
+      <p><input class="form-control" placeholder="enter a new message" autofocus="" type="text" name="message"></p>
+      <p><button class="btn btn-lg btn-primary btn-block" type="submit" value="submit">add</button></p>
+    </form>
+  </div>
 {% endblock %}
