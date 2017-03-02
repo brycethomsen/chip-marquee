@@ -8,7 +8,9 @@
 
 
 ## Usage:
-someday
+```
+sudo -E bash -c ' /home/chip/chip_marquee/venv/bin/python -m flask run --host=0.0.0.0'
+```
 
 #### Equipment:
 - Alpha PPD220GRN LED marquee
