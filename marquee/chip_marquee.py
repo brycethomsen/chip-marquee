@@ -18,8 +18,12 @@ app.config.from_envvar('FLASK_SETTINGS', silent=True)
 
 @app.route('/', methods=['GET', 'POST'])
 def index_page(message=None):
+    sign = alphasign.interfaces.local.Serial(device='/dev/ttyS0')
+    sign.connect()
     if request.method == 'POST':
         message = request.form['message']
+        display_msg = alphasign.Text('{}'.format(message), label="A", mode=alphasign.modes.HOLD)
+        sign.write(display_msg)
     else:
         pass
     return render_template("index.html", message=message)
