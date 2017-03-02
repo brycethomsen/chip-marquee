@@ -6,8 +6,6 @@ echo "systemctl $TTYSTATE serial-getty@ttyS0.service"
 
 while true; do
   X0=$(cat /sys/class/gpio/gpio1013/value)
-  X1=$(cat /sys/class/gpio/gpio1014/value)
-
   if [ $X0 == 0 ]; then
     if [ $TTYSTATE == "stop" ]; then
       TTYSTATE="start"
