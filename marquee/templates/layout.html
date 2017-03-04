@@ -12,10 +12,10 @@
         <nav>
           <ul class="nav nav-pills float-right">
             <li class="nav-item">
-              <a class="nav-link active" href="{{ url_for('index_page') }}">message<span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{{ url_for('index_page') }}">message<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href=""{{ url_for('index_page') }}"">admin</a>
+              <a class="nav-link" href="{{ url_for('admin') }}">admin</a>
             </li>
           </ul>
         </nav>
@@ -41,8 +41,11 @@
         </footer>
 
         </div> <!-- /container -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='jquery.min.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+<script type=text/javascript> $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};</script>
+
+
 
 
 

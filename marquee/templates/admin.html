@@ -1,6 +1,27 @@
-TODO:
+<!-- TODO:
 
 - delete all messages
 - restart
 - change to local/internet
-- psutil stats
+- psutil stats -->
+
+{% extends "layout.html" %}
+
+{% block body %}
+<script type="text/javascript">
+    setInterval(function(){
+      $.getJSON($SCRIPT_ROOT + '/stats', function(data) {
+     $("#cpu").text(data.cpu),
+     $("#mem").text(data.mem),
+     $("#addr").text(data.addr),
+     $("#disk").text(data.disk);
+   });
+ }, 1500);
+
+</script>
+
+<p>cpu: <span id=cpu>?</span>%</p>
+<p>disk: <span id=disk>?</span>%</p>
+<p>mem: <span id=mem>?</span>%</p>
+<p>addr: <span id=addr>?</span></p>
+{% endblock %}

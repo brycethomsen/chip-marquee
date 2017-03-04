@@ -2,8 +2,9 @@ import os
 import alphasign
 import serial
 import time
-from flask import Flask, request, session, g, redirect, url_for, abort, \
-render_template, flash
+import psutil
+from flask import Flask, request, url_for, \
+render_template, flash, jsonify
 app = Flask(__name__)
 # Load default config and override config from an environment variable
 app.config.update(dict(
@@ -32,7 +33,9 @@ def index_page(message=None):
 
 @app.route('/admin')
 def admin():
-    return render_template('admin.html')
+    reboot = os.system('reboot')
+    shutdown = os.system('shutdown -h now')
+    return render_template('admin.html', reboot=reboot, shutdown=shutdown)
 
 
 # @app.route('/messages')
@@ -64,8 +67,11 @@ def admin():
 #          con.close()
 
 
-# @app.route('/stats', methods=['GET'])
-# def stats():
-#     cpu = psutil.cpu_percent(interval=1)
-#     disk = psutil.disk_usage('/').percent
-#     return cpu, disk
+@app.route('/stats')
+def stats():
+    cpu = psutil.cpu_percent(interval=1)
+    disk = psutil.disk_usage('/').percent
+    mem = psutil.virtual_memory().percent
+    addr = psutil.net_if_addrs()['en0'][0].address
+    # network = psutil.net_io_counters()
+    return jsonify(cpu=cpu,disk=disk, mem=mem, addr=addr)

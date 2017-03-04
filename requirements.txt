@@ -1,3 +1,4 @@
 flask
 alphasign
 pyserial
+psutil
