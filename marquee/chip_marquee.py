@@ -33,9 +33,7 @@ def index_page(message=None):
 
 @app.route('/admin')
 def admin():
-    reboot = os.system('reboot')
-    shutdown = os.system('shutdown -h now')
-    return render_template('admin.html', reboot=reboot, shutdown=shutdown)
+    return render_template('admin.html')
 
 
 # @app.route('/messages')
@@ -69,9 +67,19 @@ def admin():
 
 @app.route('/stats')
 def stats():
-    cpu = psutil.cpu_percent(interval=1)
+    cpu = psutil.cpu_percent()
     disk = psutil.disk_usage('/').percent
     mem = psutil.virtual_memory().percent
     addr = psutil.net_if_addrs()['en0'][0].address
     # network = psutil.net_io_counters()
     return jsonify(cpu=cpu,disk=disk, mem=mem, addr=addr)
+
+@app.route('/power' methods=['GET', 'POST'])
+def power():
+    if request.form['restart']:
+        print 'restart'
+    elif request.form['shutdown']:
+        print 'shutdown'
+        print request.form['shutdown']
+    else:
+        pass
