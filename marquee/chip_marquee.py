@@ -70,13 +70,13 @@ def stats():
     cpu = psutil.cpu_percent()
     disk = psutil.disk_usage('/').percent
     mem = psutil.virtual_memory().percent
-    addr = psutil.net_if_addrs()['en0'][0].address
+    addr = psutil.net_if_addrs()['wlan0'][0].address
     # network = psutil.net_io_counters()
     return jsonify(cpu=cpu,disk=disk, mem=mem, addr=addr)
 
-@app.route('/power' methods=['GET', 'POST'])
+@app.route('/power', methods=['POST'])
 def power():
-    if request.form['restart']:
+    if request.form['reboot']:
         print 'restart'
     elif request.form['shutdown']:
         print 'shutdown'
