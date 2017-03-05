@@ -2,7 +2,7 @@
 
 {% block body %}
   <div class="jumbotron">
-    <form action="{{ url_for('index_page') }}" class="form-signin" method="post">
+    <form action="{{ url_for('index') }}" class="form-signin" method="post">
       <p><input class="form-control" placeholder="enter a new message" autofocus="" type="text" name="message"></p>
       <p><button class="btn btn-lg btn-primary btn-block" type="submit" value="submit">add</button></p>
     </form>

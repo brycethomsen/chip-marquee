@@ -18,7 +18,7 @@ app.config.from_envvar('FLASK_SETTINGS', silent=True)
 
 
 @app.route('/', methods=['GET', 'POST'])
-def index_page(message=None):
+def index(message=None):
     # sign = alphasign.interfaces.local.Serial(device='/dev/ttyS0')
     # sign.connect()
     if request.method == 'POST':
@@ -74,12 +74,11 @@ def stats():
     # network = psutil.net_io_counters()
     return jsonify(cpu=cpu,disk=disk, mem=mem, addr=addr)
 
-@app.route('/power', methods=['POST'])
-def power():
-    if request.form['reboot']:
-        print 'restart'
-    elif request.form['shutdown']:
-        print 'shutdown'
-        print request.form['shutdown']
-    else:
-        pass
+
+@app.route('/_reboot', methods=['POST'])
+def reboot():
+    return render_template('admin.html', (os.system('reboot')))
+
+@app.route('/_shutdown', methods=['POST'])
+def shutdown():
+    return render_template('admin.html', (os.system('shutdown -h now')))

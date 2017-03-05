@@ -1,9 +1,9 @@
 <!-- TODO:
 
 - delete all messages
-- restart
 - change to local/internet
-- psutil stats -->
+- format page
+ -->
 
 {% extends "layout.html" %}
 
@@ -16,13 +16,16 @@
      $("#addr").text(data.addr),
      $("#disk").text(data.disk);
    });
- }, 1500);
+ }, 2000);
 
 </script>
-<form action="/power" method="post">
-    <button type="submit" value="reboot">reboot</button>
-    <button type="submit" value="shutdown">shutdown</button>
+<form action="{{ url_for('reboot') }}" method="post">
+    <button type="submit" value="reboot" name="reboot">reboot</button>
 </form>
+<form action="{{ url_for('shutdown') }}" method="post">
+  <button type="submit" value="shutdown" name="shutdown">reboot</button>
+</form>
+
 <p>cpu: <span id=cpu>?</span>%</p>
 <p>disk: <span id=disk>?</span>%</p>
 <p>mem: <span id=mem>?</span>%</p>
