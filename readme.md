@@ -3,7 +3,6 @@
 ## Features:
 - Display custom messages via HTTP interface
 - Change between local wifi and internet connected wifi by pressing the button
-- Send messages via POST?
 
 
 

@@ -1,13 +1,59 @@
 <!-- TODO:
-
-- delete all messages
 - change to local/internet
-- format page
  -->
 
 {% extends "layout.html" %}
 
 {% block body %}
+
+<div class="row marketing">
+  <div class="col-lg-6">
+    <form action="{{ url_for('toggle_wifi') }}" method="post">
+      <p><button class="btn btn-primary btn-block" type="submit" value="togglewifi" name="togglewifi">toggle wifi</button></p>
+    </form>
+
+    <form action="{{ url_for('clear_mem') }}" method="post">
+      <p><button class="btn btn-primary btn-block" type="submit" value="clearmem" name="clearmem">clear sign mem</button></p>
+    </form>
+
+    <form action="{{ url_for('clear_db') }}" method="post">
+      <p><button class="btn btn-primary btn-block" type="submit" value="cleardb" name="cleardb">clear db</button></p>
+    </form>
+
+    <form action="{{ url_for('reboot') }}" method="post">
+        <p><button class="btn btn-primary btn-block" type="submit" value="reboot" name="reboot">reboot</button></p>
+    </form>
+
+    <form action="{{ url_for('shutdown') }}" method="post">
+      <p><button class="btn btn-primary btn-block" type="submit" value="shutdown" name="shutdown">shutdown</button></p>
+    </form>
+  </div>
+
+  <div class="col-lg-6">
+    <table class="table table-striped">
+      <tbody>
+        <tr>
+          <td>cpu:</td>
+          <td><span id=cpu>?</span>%</td>
+        </tr>
+        <tr>
+          <td>disk:</td>
+          <td><span id=disk>?</span>%</td>
+        </tr>
+        <tr>
+          <td>mem:</td>
+          <td><span id=mem>?</span>%</td>
+        </tr>
+        <tr>
+          <td>addr:</td>
+          <td><span id=addr>?</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
 <script type="text/javascript">
     setInterval(function(){
       $.getJSON($SCRIPT_ROOT + '/stats', function(data) {
@@ -19,15 +65,7 @@
  }, 2000);
 
 </script>
-<form action="{{ url_for('reboot') }}" method="post">
-    <button type="submit" value="reboot" name="reboot">reboot</button>
-</form>
-<form action="{{ url_for('shutdown') }}" method="post">
-  <button type="submit" value="shutdown" name="shutdown">shutdown</button>
-</form>
 
-<p>cpu: <span id=cpu>?</span>%</p>
-<p>disk: <span id=disk>?</span>%</p>
-<p>mem: <span id=mem>?</span>%</p>
-<p>addr: <span id=addr>?</span></p>
+
+
 {% endblock %}

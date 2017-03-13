@@ -2,9 +2,26 @@
 
 {% block body %}
   <div class="jumbotron">
-    <form action="{{ url_for('index') }}" class="form-signin" method="post">
+    <form action="{{ url_for('add') }}" class="form-signin" method="post">
       <p><input class="form-control" placeholder="enter a new message" autofocus="" type="text" name="message"></p>
       <p><button class="btn btn-lg btn-primary btn-block" type="submit" value="submit">add</button></p>
     </form>
+      </div>
+    <div class="row marketing">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="text-center">messages in rotation:</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for message in messages %}
+        <tr>
+          <td class="text-center">{{ message.text|safe }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
+
 {% endblock %}
