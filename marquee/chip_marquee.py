@@ -46,8 +46,7 @@ def stats():
     cpu = psutil.cpu_percent()
     disk = psutil.disk_usage('/').percent
     mem = psutil.virtual_memory().percent
-    addr = 'testing'
-    # addr = psutil.net_if_addrs()['wlan0'][0].address
+    addr = psutil.net_if_addrs()['wlan0'][0].address
     # network = psutil.net_io_counters()
     return jsonify(cpu=cpu,disk=disk, mem=mem, addr=addr)
 
@@ -56,17 +55,21 @@ def stats():
 def reboot():
     return render_template('admin.html', (os.system('reboot')))
 
+
 @app.route('/_shutdown', methods=['POST'])
 def shutdown():
     return render_template('admin.html', (os.system('shutdown -h now')))
 
+
 @app.route('/_clear_db', methods=['POST'])
 def clear_db():
+    close_db('Close existing connections to clear db.')
     db = get_db()
     cur = db.execute('delete from messages')
     flash('all messages cleared')
     db.commit()
     return render_template('admin.html')
+
 
 @app.route('/_clear_mem', methods=['POST'])
 def clear_mem():
@@ -74,6 +77,7 @@ def clear_mem():
     sign.connect()
     sign.clear_memory()
     return render_template('admin.html')
+
 
 @app.route('/_toggle_wifi', methods=['POST'])
 def toggle_wifi():
@@ -99,6 +103,7 @@ def connect_db():
     rv = sqlite3.connect(app.config['DATABASE'])
     rv.row_factory = sqlite3.Row
     return rv
+
 
 def get_db():
     if not hasattr(g, 'sqlite_db'):
