@@ -14,11 +14,21 @@ def display():
         try:
             sign = alphasign.interfaces.local.Serial(device='/dev/ttyUSB0')
             sign.connect()
-            messages = c.execute('select text from messages order by message_id desc')
-            for text in messages:
-                display_msg = alphasign.Text('{}'.format(text[0]),
+
+            rows = c.execute('select text, color_name, font_name, mode_name ' + \
+                'from messages ' + \
+                'left join colors on colors.color_id = messages.color_id ' + \
+                'left join fonts on fonts.font_id = messages.font_id ' + \
+                'left join modes on modes.mode_id = messages.mode_id ' + \
+                'order by message_id desc')
+            for row in rows:
+                message = row[0]
+                color = row[1]
+                font = row[3]
+                mode = row[4]
+                display_msg = alphasign.Text("%s%s%s" % (color, font, message),
                                              label="A",
-                                             mode=alphasign.modes.HOLD)
+                                             mode=mode)
                 try:
                     sign.write(display_msg)
                 except:
@@ -34,7 +44,7 @@ def display():
             else:
                 time.sleep(4)
                 timeout += 1
-                print timeout
+                print(timeout)
 
 
 if __name__ == '__main__':

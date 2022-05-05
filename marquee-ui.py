@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from operator import mod
 import os
-#import alphasign
+import alphasign
 import sqlite3
 import serial
 import time
