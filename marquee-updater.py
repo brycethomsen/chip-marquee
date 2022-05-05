@@ -7,7 +7,7 @@ import time
 
 def display():
     #conn = sqlite3.connect(os.path.join('db', 'marquee_messages.db'))
-    conn = sqlite3.connect('db/marquee_messages.db')
+    conn = sqlite3.connect('/opt/marquee/db/marquee_messages.db')
     c = conn.cursor()
     timeout = 0
     while True:
@@ -22,13 +22,14 @@ def display():
                 'left join modes on modes.mode_id = messages.mode_id ' + \
                 'order by message_id desc')
             for row in rows:
-                message = row[0]
-                color = row[1]
-                font = row[3]
-                mode = row[4]
+                message = str(row[0])
+                color = getattr(alphasign.colors, str(row[1]))
+                mode = getattr(alphasign.modes, str(row[3]))
+                font = getattr(alphasign.charsets, str(row[2]))
+
                 display_msg = alphasign.Text("%s%s%s" % (color, font, message),
-                                             label="A",
-                                             mode=mode)
+                                                label="A",
+                                                mode=alphasign.modes.HOLD)
                 try:
                     sign.write(display_msg)
                 except:

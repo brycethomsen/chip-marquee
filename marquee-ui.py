@@ -12,7 +12,7 @@ from flask import Flask, request, url_for, g, \
 app = Flask(__name__)
 # Load default config and override config from an environment variable
 app.config.update(dict(
-    DATABASE=('db/marquee_messages.db'),
+    DATABASE=('/opt/marquee/db/marquee_messages.db'),
     DEBUG=True,
     SECRET_KEY='development key',
     USERNAME='admin',
