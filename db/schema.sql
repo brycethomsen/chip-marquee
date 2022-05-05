@@ -21,24 +21,24 @@ CREATE TABLE fonts (
 CREATE TABLE messages (
 	  message_id INTEGER PRIMARY KEY autoincrement,
 	  text TEXT NOT NULL,
-	  color_id INTEGER DEFAULT 0,
-	  mode_id INTEGER DEFAULT 0,
-	  font_id INTEGER DEFAULT 0,
+	  color_id INTEGER DEFAULT 1,
+	  mode_id INTEGER DEFAULT 1,
+	  font_id INTEGER DEFAULT 1,
 	  FOREIGN KEY (color_id) REFERENCES colors (color_id) ON DELETE SET DEFAULT,
-	  FOREIGN KEY (mode_id) REFERENCES colors (mode_id) ON DELETE SET DEFAULT,
-	  FOREIGN KEY (font_id) REFERENCES colors (font_id) ON DELETE SET DEFAULT
+	  FOREIGN KEY (mode_id) REFERENCES modes (mode_id) ON DELETE SET DEFAULT,
+	  FOREIGN KEY (font_id) REFERENCES fonts (font_id) ON DELETE SET DEFAULT
 );
 
+INSERT INTO colors (color_name) VALUES ("AUTOCOLOR");
 INSERT INTO colors (color_name) VALUES ("RED");
 INSERT INTO colors (color_name) VALUES ("GREEN");
 INSERT INTO colors (color_name) VALUES ("AMBER");
 INSERT INTO colors (color_name) VALUES ("RAINBOW_1");
 INSERT INTO colors (color_name) VALUES ("RAINBOW_2");
 INSERT INTO colors (color_name) VALUES ("COLOR_MIX");
-INSERT INTO colors (color_name) VALUES ("AUTOCOLOR");
 
-INSERT INTO modes (mode_name) VALUES ("ROTATE");
 INSERT INTO modes (mode_name) VALUES ("HOLD");
+INSERT INTO modes (mode_name) VALUES ("ROTATE");
 INSERT INTO modes (mode_name) VALUES ("ROLL_UP");
 INSERT INTO modes (mode_name) VALUES ("ROLL_DOWN");
 INSERT INTO modes (mode_name) VALUES ("ROLL_LEFT");
@@ -68,6 +68,6 @@ INSERT INTO modes (mode_name) VALUES ("RUNNING_ANIMAL");
 INSERT INTO modes (mode_name) VALUES ("FIREWORKS");
 INSERT INTO modes (mode_name) VALUES ("TURBO_CAR");
 
-INSERT INTO fonts (font_name) VALUES ("FIVE_HIGH_STD");
 INSERT INTO fonts (font_name) VALUES ("SEVEN_HIGH_STD");
 INSERT INTO fonts (font_name) VALUES ("SEVEN_HIGH_FANCY");
+INSERT INTO fonts (font_name) VALUES ("FIVE_HIGH_STD");

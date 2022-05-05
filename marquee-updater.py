@@ -7,7 +7,7 @@ import time
 
 def display():
     #conn = sqlite3.connect(os.path.join('db', 'marquee_messages.db'))
-    conn = sqlite3.connect('/home/pi/chip-marquee/marquee/db/marquee_messages.db')
+    conn = sqlite3.connect('db/marquee_messages.db')
     c = conn.cursor()
     timeout = 0
     while True:

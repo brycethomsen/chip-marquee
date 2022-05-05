@@ -3,21 +3,92 @@
 {% block body %}
   <div class="jumbotron">
     <form action="{{ url_for('add') }}" class="form-signin" method="post">
-      <p><input class="form-control" placeholder="enter a new message" autofocus="" type="text" name="message"></p>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Message</label>
+        <input class="form-control" placeholder="enter a new message" autofocus="" type="text" name="message">
+      </div>
+      <p>
+        <div class="form">
+          <div class="row">
+            <div class="col">
+              <label for="modeSelectFormControl">Mode</label>
+              <select class="form-control form-control-sm form-control-inline" id="modeSelectFormControl" name="mode">
+                <option>ROTATE</option>
+                <option>HOLD</option>
+                <option>ROLL_UP</option>
+                <option>ROLL_DOWN</option>
+                <option>ROLL_LEFT</option>
+                <option>ROLL_RIGHT</option>
+                <option>WIPE_UP</option>
+                <option>WIPE_DOWN</option>
+                <option>WIPE_LEFT</option>
+                <option>WIPE_RIGHT</option>
+                <option>SCROLL</option>
+                <option>ROLL_IN</option>
+                <option>ROLL_OUT</option>
+                <option>WIPE_IN</option>
+                <option>WIPE_OUT</option>
+                <option>TWINKLE</option>
+                <option>SPARKLE</option>
+                <option>SNOW</option>
+                <option>INTERLOCK</option>
+                <option>SWITCH</option>
+                <option>SPRAY</option>
+                <option>STARBURST</option>
+                <option>WELCOME</option>
+                <option>SLOT_MACHINE</option>
+                <option>THANK_YOU</option>
+                <option>NO_SMOKING</option>
+                <option>DONT_DRINK_DRIVE</option>
+                <option>RUNNING_ANIMAL</option>
+                <option>FIREWORKS</option>
+                <option>TURBO_CAR</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="colorSelectFormControl">Color</label>
+              <select class="form-control form-control-sm form-control-inline" id="colorSelectFormControl" name="color">
+                <option>RED</option>
+                <option>GREEN</option>
+                <option>AMBER</option>
+                <option>RAINBOW_1</option>
+                <option>RAINBOW_2</option>
+                <option>COLOR_MIX</option>
+                <option>AUTOCOLOR</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="fontSelectFormControl">Font</label>
+              <select class="form-control form-control-sm form-control-inline" id="fontSelectFormControl" name="font">
+                <option>FIVE_HIGH_STD</option>
+                <option>SEVEN_HIGH_STD</option>
+                <option>SEVEN_HIGH_FANCY</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </p>
       <p><button class="btn btn-lg btn-primary btn-block" type="submit" value="submit">add</button></p>
     </form>
-      </div>
-    <div class="row marketing">
-    <table class="table table-striped">
+  </div>
+  <div class="text-center font-weight-bold">Messages in Queue:</div>
+  <div class="row marketing">
+    <table class="table table-striped" id="currentMessageForm">
       <thead>
         <tr>
-          <th class="text-center">messages in rotation:</th>
+          <th class="text-center">Message</th>
+          <th class="text-center">Color</th>
+          <th class="text-center">Font</th>
+          <th class="text-center">Mode</th>
         </tr>
       </thead>
       <tbody>
         {% for message in messages %}
         <tr>
           <td class="text-center">{{ message.text|safe }}</td>
+          <td class="text-center">{{ message.color_name|safe }}</td>
+          <td class="text-center">{{ message.font_name|safe }}</td>
+          <td class="text-center">{{ message.mode_name|safe }}</td>
         </tr>
         {% endfor %}
       </tbody>

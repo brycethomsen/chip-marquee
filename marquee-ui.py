@@ -1,6 +1,7 @@
 #!/usr/bin/env python
+from operator import mod
 import os
-import alphasign
+#import alphasign
 import sqlite3
 import serial
 import time
@@ -11,7 +12,7 @@ from flask import Flask, request, url_for, g, \
 app = Flask(__name__)
 # Load default config and override config from an environment variable
 app.config.update(dict(
-    DATABASE=('/opt/marquee/db/marquee_messages.db'),
+    DATABASE=('db/marquee_messages.db'),
     DEBUG=True,
     SECRET_KEY='development key',
     USERNAME='admin',
@@ -23,15 +24,25 @@ app.config.from_envvar('FLASK_SETTINGS', silent=True)
 @app.route('/', methods=['GET'])
 def index():
     db = get_db()
-    cur = db.execute('select text from messages order by message_id desc')
+    cur = db.execute('select text, color_name, font_name, mode_name ' + \
+        'from messages ' + \
+        'left join colors on colors.color_id = messages.color_id ' + \
+        'left join fonts on fonts.font_id = messages.font_id ' + \
+        'left join modes on modes.mode_id = messages.mode_id ' + \
+        'order by message_id desc')
     messages = cur.fetchall()
     return render_template("index.html", messages=messages)
 
 @app.route('/', methods=['POST'])
 def add():
     db = get_db()
-    db.execute('insert into messages (text) values (?)',
-         [request.form['message']])
+    message = [request.form['message']][0]
+    color_id = get_db_color_id([request.form['color']])
+    font_id = get_db_font_id([request.form['font']])
+    mode_id = get_db_mode_id([request.form['mode']])
+    values = (message, color_id, font_id, mode_id)
+    print("values: " + str(values))
+    db.execute('insert into messages (text, color_id, font_id, mode_id) values (?, ?, ?, ?)', values)
     db.commit()
     flash("Added: " + request.form['message'])
     return redirect(url_for('index'))
@@ -67,7 +78,7 @@ def shutdown():
 def clear_db():
     close_db('Close existing connections to clear db.')
     db = get_db()
-    cur = db.execute('delete from messages')
+    db.execute('delete from messages')
     flash('all messages cleared')
     db.commit()
     return render_template('admin.html')
@@ -111,6 +122,31 @@ def get_db():
     if not hasattr(g, 'sqlite_db'):
         g.sqlite_db = connect_db()
     return g.sqlite_db
+
+
+def get_db_color_id(color_name):
+    query = 'select color_id from colors where color_name = (?)'
+    return execute_db_select(query, color_name)
+
+
+def get_db_font_id(font_name):
+    query = 'select font_id from fonts where font_name = (?)'
+    return execute_db_select(query, font_name)
+
+
+def get_db_mode_id(mode_name):
+    query = 'select mode_id from modes where mode_name = (?)'
+    return execute_db_select(query, mode_name)
+
+
+def execute_db_select(query, query_values):
+    db = get_db()
+    cur = db.execute(query, query_values)
+    row = cur.fetchone()
+    if(len(row) > 0):
+        return row[0]
+    else:
+        return 0
 
 
 @app.teardown_appcontext

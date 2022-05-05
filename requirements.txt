@@ -2,3 +2,4 @@ flask
 alphasign
 pyserial
 psutil
+constants
