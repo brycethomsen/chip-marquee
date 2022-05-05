@@ -15,7 +15,7 @@ app.config.update(dict(
     DEBUG=True,
     SECRET_KEY='development key',
     USERNAME='admin',
-    PASSWORD='default'
+    PASSWORD='default',
     DEVICE='/dev/ttyUSB0'
 ))
 app.config.from_envvar('FLASK_SETTINGS', silent=True)
