@@ -29,7 +29,7 @@ def display():
 
                 display_msg = alphasign.Text("%s%s%s" % (color, font, message),
                                                 label="A",
-                                                mode=alphasign.modes.HOLD)
+                                                mode=mode)
                 try:
                     sign.write(display_msg)
                 except:
