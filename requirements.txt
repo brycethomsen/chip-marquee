@@ -2,3 +2,5 @@ flask
 alphasign
 pyserial
 psutil
+constants
+gunicorn

@@ -1,0 +1,28 @@
+---
+version: "3.9"
+services:
+  marquee-updater:
+    container_name: marquee-updater
+    image: marquee
+    build:
+      context: .
+      dockerfile: Dockerfile
+    privileged: true
+    volumes:
+      - /dev/ttyUSB0:/dev/ttyUSB0
+      - /marquee:/app
+    command: python /app/marquee-updater.py
+    restart: always
+  maruqee-ui:
+    container_name: marquee-ui
+    image: marquee
+    environment:
+      - FLASK_APP=/app/marquee-ui.py
+    privileged: true
+    volumes:
+      - /dev/ttyUSB0:/dev/ttyUSB0
+      - /marquee:/app
+    ports:
+      - "80:80"
+    command: python -m flask run --host=0.0.0.0 --port=80 --with-threads
+    restart: always
