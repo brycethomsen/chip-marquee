@@ -1,5 +1,6 @@
 DELETE FROM messages;
 
+-- Add colors
 INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Red", 1, 1, 2);
 INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Green", 2, 1, 2);
 INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Amber", 3, 1, 2);
@@ -7,9 +8,13 @@ INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Rainbow 1", 4, 
 INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Rainbow 2", 5, 1, 2);
 INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Color Mix", 6, 1, 2);
 INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Autocolor", 7, 1, 2);
+
+-- Add fonts
 INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Five High STD", 1, 1, 2);
 INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Seven High STD", 1, 2, 2);
 INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Seven High Fancy", 1, 3, 2);
+
+-- Add modes
 INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Rotate", 1, 1, 1);
 INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Hold", 1, 1, 2);
 INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Roll Up", 1, 1, 3);
@@ -40,3 +45,13 @@ INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Don't Drink and
 INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Running Animal", 1, 1, 28);
 INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Fireworks", 1, 1, 29);
 INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Turbo Car", 1, 1, 30);
+INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Flash", 1, 1, 31);
+INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Auto Mode", 1, 1, 32);
+INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Compressed Rotate", 1, 1, 33);
+INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Explode", 1, 1, 34);
+INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Clock", 1, 1, 35);
+INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("News Flash", 1, 1, 36);
+INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Trumpet Animation", 1, 1, 37);
+INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Fish Animation", 1, 1, 38);
+INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Baloon Animation", 1, 1, 39);
+INSERT INTO messages (text, color_id, font_id, mode_id) VALUES ("Cherry Bomb", 1, 1, 40);

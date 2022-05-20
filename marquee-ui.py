@@ -12,7 +12,7 @@ from flask import Flask, request, url_for, g, \
 app = Flask(__name__)
 # Load default config and override config from an environment variable
 app.config.update(dict(
-    DATABASE=('/opt/marquee/db/marquee_messages.db'),
+    DATABASE=('/app/db/marquee_messages.db'),
     DEBUG=True,
     SECRET_KEY='development key',
     USERNAME='admin',
@@ -58,9 +58,9 @@ def stats():
     cpu = psutil.cpu_percent()
     disk = psutil.disk_usage('/').percent
     mem = psutil.virtual_memory().percent
-    #addr = psutil.net_if_addrs()['wlan0'][0].address
-    addr = "0.0.0.0"
-    # network = psutil.net_io_counters()
+    addr = psutil.net_if_addrs()['wlan0'][0].address
+    #addr = "0.0.0.0"
+    network = psutil.net_io_counters()
     return jsonify(cpu=cpu,disk=disk, mem=mem, addr=addr)
 
 
@@ -89,6 +89,7 @@ def clear_mem():
     sign = alphasign.interfaces.local.Serial(device=app.config['DEVICE'])
     sign.connect()
     sign.clear_memory()
+    flash('cleared sign memory')
     return render_template('admin.html')
 
 

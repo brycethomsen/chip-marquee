@@ -3,3 +3,4 @@ alphasign
 pyserial
 psutil
 constants
+gunicorn

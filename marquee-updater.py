@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 import os
 import alphasign
 import sqlite3
@@ -6,13 +7,15 @@ import serial
 import time
 
 def display():
-    #conn = sqlite3.connect(os.path.join('db', 'marquee_messages.db'))
-    conn = sqlite3.connect('/opt/marquee/db/marquee_messages.db')
+    sleepBetweenMessages = 20
+    conn = sqlite3.connect('/app/db/marquee_messages.db')
     c = conn.cursor()
     timeout = 0
     while True:
         try:
-            sign = alphasign.interfaces.local.Serial(device='/dev/ttyUSB0')
+            #sign = alphasign.interfaces.local.Serial(device='/dev/ttyUSB0')
+            sign = alphasign.Serial(device='/dev/ttyUSB0')
+            #sign = alphasign.USB("2478:2008")
             sign.connect()
 
             rows = c.execute('select text, color_name, font_name, mode_name ' + \
@@ -27,25 +30,30 @@ def display():
                 mode = getattr(alphasign.modes, str(row[3]))
                 font = getattr(alphasign.charsets, str(row[2]))
 
+                print("Writing message: %s, color: %s, font: %s, mode: %s" % (message, color, font, mode))
+
                 display_msg = alphasign.Text("%s%s%s" % (color, font, message),
                                                 label="A",
                                                 mode=mode)
                 try:
+                    print("Sending to sign: %s" % (display_msg))
                     sign.write(display_msg)
-                except:
+                except Exception as e:
+                    print("Failed to write to sign: " + str(e))
                     continue #not working correctly
-                time.sleep(4)
+                time.sleep(sleepBetweenMessages)
                 timeout = 0
-            time.sleep(5)
+            time.sleep(sleepBetweenMessages)
 
-        except:
+        except Exception as e:
+            print("General Exception: " + str(e))
             if timeout > 4:
                 timeout = 0
-                time.sleep(20)
+                time.sleep(sleepBetweenMessages)
             else:
-                time.sleep(4)
+                time.sleep(timeout)
                 timeout += 1
-                print(timeout)
+                print("Timeout: " + str(timeout))
 
 
 if __name__ == '__main__':

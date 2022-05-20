@@ -67,6 +67,18 @@ INSERT INTO modes (mode_name) VALUES ("DONT_DRINK_DRIVE");
 INSERT INTO modes (mode_name) VALUES ("RUNNING_ANIMAL");
 INSERT INTO modes (mode_name) VALUES ("FIREWORKS");
 INSERT INTO modes (mode_name) VALUES ("TURBO_CAR");
+INSERT INTO modes (mode_name) VALUES ("FLASH");
+INSERT INTO modes (mode_name) VALUES ("AUTO_MODE");
+INSERT INTO modes (mode_name) VALUES ("COMPRESSED_ROTATE");
+INSERT INTO modes (mode_name) VALUES ("EXPLODE");
+INSERT INTO modes (mode_name) VALUES ("CLOCK");
+INSERT INTO modes (mode_name) VALUES ("NEWS_FLASH");
+INSERT INTO modes (mode_name) VALUES ("TRUMPET_ANIMATION");
+INSERT INTO modes (mode_name) VALUES ("NEWS_FLASH");
+INSERT INTO modes (mode_name) VALUES ("FISH_ANIMATION");
+INSERT INTO modes (mode_name) VALUES ("BALLOON_ANIMATION");
+INSERT INTO modes (mode_name) VALUES ("CHERRY_BOMB");
+
 
 INSERT INTO fonts (font_name) VALUES ("FIVE_HIGH_STD");
 INSERT INTO fonts (font_name) VALUES ("SEVEN_HIGH_STD");
