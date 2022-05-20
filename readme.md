@@ -9,3 +9,5 @@ Python app that writes text to Betabrite signs.
 * Marquee-updater reads from the database and sends the commands to the sign
 * Both apps can run as a systemd service with the service files
 * Both apps can also run within docker using the Dockerfile and docker-compose-yml files
+
+Big thanks to https://github.com/brycethomsen/chip-marquee for starting this whole thing! 
